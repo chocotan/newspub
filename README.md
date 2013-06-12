@@ -12,4 +12,4 @@
 * 文章管理
 * 忽悠老师
 
-!(http://screencloud.net/img/screenshots/1fab756d41c47e8849eb54ef4339b816.png)
+![img](http://screencloud.net/img/screenshots/1fab756d41c47e8849eb54ef4339b816.png)
