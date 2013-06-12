@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+    version="2.1">
+    <application>
+        <el-resolver>
+                org.springframework.web.jsf.el.SpringBeanFacesELResolver
+        </el-resolver>
+        <resource-bundle>
+        	<base-name>io.loli.newspub.ywl.res.msg</base-name>
+        	<var>msg</var>
+        </resource-bundle>
+    </application>
+    <navigation-rule>
+    	<from-view-id>/admin/cat/edit.xhtml</from-view-id>
+    	<navigation-case>
+    		<from-outcome>list</from-outcome>
+    		<to-view-id>/admin/cat/list.xhtml</to-view-id>
+    		<redirect></redirect>
+    	</navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+    	<from-view-id>/admin/cat/list.xhtml</from-view-id>
+    	<navigation-case>
+    		<from-outcome>list</from-outcome>
+    		<to-view-id>/admin/cat/list.xhtml</to-view-id>
+    		<redirect></redirect>
+    	</navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+    	<from-view-id>/admin/news/add.xhtml</from-view-id>
+    	<navigation-case>
+    		<from-outcome>list</from-outcome>
+    		<to-view-id>/admin/news/list.xhtml</to-view-id>
+    		<redirect></redirect>
+    	</navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+    	<navigation-case>
+    		<from-outcome>logoutSuccess</from-outcome>
+    		<to-view-id>/admin/login.xhtml</to-view-id>
+    		<redirect></redirect>
+    	</navigation-case>
+    	<navigation-case>
+    		<from-outcome>catList</from-outcome>
+    		<to-view-id>/admin/cat/list.xhtml</to-view-id>
+    		<redirect></redirect>
+    	</navigation-case>
+    </navigation-rule>
+    <lifecycle>
+    	<phase-listener>io.loli.newspub.ywl.interceptor.AdminInterceptor</phase-listener>
+    </lifecycle>
+</faces-config>

@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head></h:head>
+<h:body>
+	<ui:composition template="../index.xhtml">
+		<ui:define name="left">
+			<ul class="nav nav-list nav-stacked affix sidebar">
+				<li class="nav-header"><h4>新闻分类</h4></li>
+				<li><h:outputLink value="../cat/list.jsf">
+						<h:outputText value="全部分类" />
+					</h:outputLink></li>
+				<li><a href="../cat/list.jsf">添加分类</a></li>
+				<li class="divider"></li>
+				<li class="nav-header"><h4>新闻</h4></li>
+				<li class="active"><a href="../news/list.jsf">新闻列表</a></li>
+				<li><a href="../news/add.jsf">添加新闻</a></li>
+			</ul>
+		</ui:define>
+		<ui:define name="content">
+			<h2>
+				<h:outputText value="#{catBean.findById(param.c_id).name}"
+					rendered="${param.c_id!=null}" />
+			</h2>
+			<h:form>
+				<h:inputHidden value="#{newsBean.news.id}" />
+				<h:dataTable styleClass="table table-hover table-bordered"
+					value="#{newsBean.listPage(param.c_id,param.page)}" var="news">
+					<h:column>
+						<f:facet name="header">#</f:facet>
+						<h:selectBooleanCheckbox id="check"
+							value="#{newsBean.deleted[news.id]}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">文章名</f:facet>
+						<h:outputLabel for="check" value="#{news.title}"></h:outputLabel>
+					</h:column>
+					<h:column>
+						<f:facet name="header">发布时间</f:facet>
+						<h:outputText value="#{news.pubDate}">
+							<f:convertDateTime timeZone="GMT+8" pattern="yyyy-MM-dd HH:mm:ss" />
+						</h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">分类名</f:facet>
+						#{news.category.name}
+					</h:column>
+					<h:column>
+						<f:facet name="header">作者</f:facet>
+					#{news.admin.username}
+				</h:column>
+					<h:column>
+						<f:facet name="header">修改</f:facet>
+						<h:outputLink value="edit.jsf">
+							<h:outputText value="修改" />
+							<f:param name="id" value="#{news.id}"></f:param>
+						</h:outputLink>
+					</h:column>
+				</h:dataTable>
+				<div class="pagination">
+					<ul>
+						<li><h:panelGroup
+								rendered="#{param.page!=null and param.page>1}">
+								<h:outputLink value="" rendered="#{param.c_id!=null}">Prev
+								<f:param name="page" value="#{param.page-1}"></f:param>
+									<f:param name="c_id" value="#{param.c_id}"></f:param>
+								</h:outputLink>
+								<h:outputLink value="" rendered="#{param.c_id==null}">Prev
+								<f:param name="page" value="#{param.page-1}"></f:param>
+								</h:outputLink>
+							</h:panelGroup> <h:panelGroup rendered="#{param.page==null or param.page le 1}">
+								<a href="#">Prev</a>
+							</h:panelGroup></li>
+						<ui:repeat var="pageNum" value="#{newsBean.pageList(param.c_id)}">
+							<h:panelGroup
+								rendered="#{param.page==pageNum||(param.page==null and pageNum==1)}">
+								<li class="active"><h:outputLink value=""
+										rendered="#{param.c_id!=null}">#{pageNum}
+									<f:param name="page" value="#{pageNum}"></f:param>
+										<f:param name="c_id" value="#{param.c_id}"></f:param>
+									</h:outputLink> <h:outputLink value="" rendered="#{param.c_id==null}">#{pageNum}
+									<f:param name="page" value="#{pageNum}"></f:param>
+									</h:outputLink></li>
+							</h:panelGroup>
+							<h:panelGroup
+								rendered="#{param.page!=pageNum and (param.page!=null||pageNum!=1)}">
+								<li><h:outputLink value="" rendered="#{param.c_id!=null}">#{pageNum}
+									<f:param name="page" value="#{pageNum}"></f:param>
+										<f:param name="c_id" value="#{param.c_id}"></f:param>
+									</h:outputLink> <h:outputLink value="" rendered="#{param.c_id==null}">#{pageNum}
+									<f:param name="page" value="#{pageNum}"></f:param>
+									</h:outputLink></li>
+							</h:panelGroup>
+						</ui:repeat>
+						<li><h:panelGroup rendered="#{param.page!=newsBean.count}">
+								<h:outputLink value=""
+									rendered="#{param.page!=null and param.c_id!=null}">Next
+								<f:param name="page" value="#{param.page+1}"></f:param>
+									<f:param name="c_id" value="#{param.c_id}"></f:param>
+								</h:outputLink>
+								<h:outputLink value=""
+									rendered="#{param.page!=null and param.c_id==null}">Next
+								<f:param name="page" value="#{param.page+1}"></f:param>
+								</h:outputLink>
+								<h:outputLink value=""
+									rendered="#{param.page==null and param.c_id!=null}">Next
+								<f:param name="page" value="#{param.page+2}"></f:param>
+									<f:param name="c_id" value="#{param.c_id}"></f:param>
+								</h:outputLink>
+								<h:outputLink value=""
+									rendered="#{param.page==null and param.c_id==null}">Next
+								<f:param name="page" value="#{param.page+2}"></f:param>
+								</h:outputLink>
+							</h:panelGroup> <h:panelGroup rendered="#{param.page==newsBean.count}">
+								<a href="#">Next</a>
+							</h:panelGroup></li>
+					</ul>
+				</div>
+				<h:commandButton class="btn" action="#{newsBean.delete}" value="删除" />
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

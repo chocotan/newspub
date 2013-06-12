@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="index.xhtml">
+		<ui:define name="content">
+			<h2>
+				<h:outputText value="#{catBean.findById(param.c_id).name}"
+					rendered="${param.c_id!=null}" />
+			</h2>
+			<h:dataTable styleClass="table table-hover table-bordered"
+				value="#{newsBean.listPage(param.c_id,param.page)}" var="news">
+				<h:column>
+					<f:facet name="header">文章名</f:facet>
+					<h:outputLink value="news.jsf">#{news.title}
+					<f:param name="id" value="#{news.id}"></f:param>
+					</h:outputLink>
+				</h:column>
+				<h:column>
+					<f:facet name="header">发布时间</f:facet>
+					<h:outputText value="#{news.pubDate}">
+						<f:convertDateTime timeZone="GMT+8" pattern="yyyy-MM-dd HH:mm:ss" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">分类名</f:facet>
+						#{news.category.name}
+					</h:column>
+				<h:column>
+					<f:facet name="header">作者</f:facet>
+					#{news.admin.username}
+				</h:column>
+			</h:dataTable>
+
+			<div class="pagination">
+				<ul>
+					<li><h:panelGroup
+							rendered="#{param.page!=null and param.page>1}">
+							<h:outputLink value="" rendered="#{param.c_id!=null}">Prev
+								<f:param name="page" value="#{param.page-1}"></f:param>
+								<f:param name="c_id" value="#{param.c_id}"></f:param>
+							</h:outputLink>
+							<h:outputLink value="" rendered="#{param.c_id==null}">Prev
+								<f:param name="page" value="#{param.page-1}"></f:param>
+							</h:outputLink>
+						</h:panelGroup> <h:panelGroup rendered="#{param.page==null or param.page le 1}">
+							<a href="#">Prev</a>
+						</h:panelGroup></li>
+					<ui:repeat var="pageNum" value="#{newsBean.pageList(param.c_id)}">
+						<h:panelGroup
+							rendered="#{param.page==pageNum||(param.page==null and pageNum==1)}">
+							<li class="active"><h:outputLink value=""
+									rendered="#{param.c_id!=null}">#{pageNum}
+									<f:param name="page" value="#{pageNum}"></f:param>
+									<f:param name="c_id" value="#{param.c_id}"></f:param>
+								</h:outputLink> <h:outputLink value="" rendered="#{param.c_id==null}">#{pageNum}
+									<f:param name="page" value="#{pageNum}"></f:param>
+								</h:outputLink></li>
+						</h:panelGroup>
+						<h:panelGroup
+							rendered="#{param.page!=pageNum and (param.page!=null||pageNum!=1)}">
+							<li><h:outputLink value="" rendered="#{param.c_id!=null}">#{pageNum}
+									<f:param name="page" value="#{pageNum}"></f:param>
+									<f:param name="c_id" value="#{param.c_id}"></f:param>
+								</h:outputLink> <h:outputLink value="" rendered="#{param.c_id==null}">#{pageNum}
+									<f:param name="page" value="#{pageNum}"></f:param>
+								</h:outputLink></li>
+						</h:panelGroup>
+					</ui:repeat>
+					<li><h:panelGroup rendered="#{param.page!=newsBean.count}">
+							<h:outputLink value=""
+								rendered="#{param.page!=null and param.c_id!=null}">Next
+								<f:param name="page" value="#{param.page+1}"></f:param>
+								<f:param name="c_id" value="#{param.c_id}"></f:param>
+							</h:outputLink>
+							<h:outputLink value=""
+								rendered="#{param.page!=null and param.c_id==null}">Next
+								<f:param name="page" value="#{param.page+1}"></f:param>
+							</h:outputLink>
+							<h:outputLink value=""
+								rendered="#{param.page==null and param.c_id!=null}">Next
+								<f:param name="page" value="#{param.page+2}"></f:param>
+								<f:param name="c_id" value="#{param.c_id}"></f:param>
+							</h:outputLink>
+							<h:outputLink value=""
+								rendered="#{param.page==null and param.c_id==null}">Next
+								<f:param name="page" value="#{param.page+2}"></f:param>
+							</h:outputLink>
+						</h:panelGroup> <h:panelGroup rendered="#{param.page==newsBean.count}">
+							<a href="#">Next</a>
+						</h:panelGroup></li>
+				</ul>
+			</div>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

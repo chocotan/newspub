@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+	<ui:composition template="../index.xhtml">
+		<ui:define name="left">
+		#{newsBean.init()}
+			<ul class="nav nav-list nav-stacked affix sidebar">
+				<li class="nav-header"><h4>新闻分类</h4></li>
+				<li><h:outputLink value="../cat/list.jsf">
+						<h:outputText value="全部分类" />
+					</h:outputLink></li>
+				<li><a href="../cat/list.jsf">添加分类</a></li>
+				<li class="divider"></li>
+				<li class="nav-header"><h4>新闻</h4></li>
+				<li><a href="../news/list.jsf">全部新闻</a></li>
+				<li class="active"><a href="../news/add.jsf">添加新闻</a></li>
+			
+			</ul>
+		</ui:define>
+		<ui:define name="content">
+			<h:form class="form-horizontal">
+				<div class="control-group">
+					<h:outputLabel value="新闻标题" for="news-title"
+						class="control-label addNews-label" />
+					<div class="controls addNews-controls">
+						<h:inputText id="news-title" value="#{newsBean.news.title}" />
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls addNews-controls">
+						<h:inputTextarea class="news-content"
+							value="#{newsBean.news.content}" />
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls addNews-controls">
+						<h:selectOneMenu value="#{newsBean.news.category.id}">
+							<f:selectItems value="#{catBean.list()}" var="cat"
+								itemLabel="#{cat.name}" itemValue="#{cat.id}" />
+						</h:selectOneMenu>
+						<h:commandButton class="btn btn-primary addNews-submit"
+							action="#{newsBean.add}" value="添加" />
+					</div>
+				</div>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

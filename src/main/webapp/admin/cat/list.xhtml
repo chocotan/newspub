@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+	<ui:composition template="../index.xhtml">
+		<ui:define name="left">
+			<ul class="nav nav-list nav-stacked affix sidebar">
+				<li class="nav-header"><h4>新闻分类</h4></li>
+				<li class="active"><h:outputLink value="list.jsf">
+						<h:outputText value="全部分类" />
+					</h:outputLink></li>
+				<li><a href="#">添加分类</a></li>
+				<li class="divider"></li>
+				<li class="nav-header"><h4>新闻</h4></li>
+				<li><a href="../news/list.jsf">全部新闻</a></li>
+				<li><a href="../news/add.jsf">添加新闻</a></li>
+			</ul>
+		</ui:define>
+		<ui:define name="content">
+			<h3>新闻分类</h3>
+			<h:form>
+				<h:dataTable styleClass="table table-hover table-bordered"
+					value="#{catBean.listPage(param.page)}" var="cat">
+					<h:column>
+						<f:facet name="header">#</f:facet>
+						<h:selectBooleanCheckbox id="check"
+							value="#{catBean.deleted[cat.id]}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">分类名</f:facet>
+						<h:outputLabel for="check" value="#{cat.name}"></h:outputLabel>
+					</h:column>
+					<h:column>
+						<f:facet name="header">修改</f:facet>
+						<h:outputLink value="edit.jsf">
+							<h:outputText value="修改" />
+							<f:param name="c_id" value="#{cat.id}"></f:param>
+						</h:outputLink>
+					</h:column>
+					<h:column>
+						<f:facet name="header">查看此分类下文章</f:facet>
+						<h:outputLink value="../news/list.jsf">
+						查看
+						<f:param name="c_id" value="#{cat.id}"></f:param>
+						</h:outputLink>
+					</h:column>
+				</h:dataTable>
+				<h:commandButton class="btn" action="#{catBean.delete}" value="删除" />
+			</h:form>
+			<h3>添加分类</h3>
+			<h:form class="form-inline">
+				<h:inputText id="catName" value="#{catBean.cat.name}"
+					required="true" />
+				<h:commandButton class="btn" action="#{catBean.add}" value="添加" />
+				<h:message for="catName" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

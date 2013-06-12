@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="index.xhtml">
+		<ui:define name="content">
+		#{newsBean.initNews(param.id)}
+		<h2>#{newsBean.news.title}</h2>
+		
+		<div class="info">
+		<span class="label">#{newsBean.news.admin.username}</span> 于
+		<span class="label">
+		<h:outputFormat value="#{newsBean.news.pubDate}" >
+		<f:convertDateTime pattern="yyyy-MM-dd HH:mm" timeZone="GMT+8"/>
+		</h:outputFormat> 
+		</span>
+		发表在分类
+		<span class="label">
+		#{newsBean.news.category.name}
+		</span>
+		下
+		</div>
+		<div class="content well">
+		<h:outputText value="#{newsBean.news.content}" escape="false"/>
+		
+		</div>
+		</ui:define>
+		
+	</ui:composition>
+</body>
+</html>

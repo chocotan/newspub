@@ -6,6 +6,9 @@
 	version="1.0">
 
 	<persistence-unit name="newspub" transaction-type="RESOURCE_LOCAL">
+		<class>io.loli.newspub.ywl.entity.Admin</class>
+		<class>io.loli.newspub.ywl.entity.Category</class>
+		<class>io.loli.newspub.ywl.entity.News</class>
 		<properties>
 			<property name="openjpa.Log" value="SQL=TRACE" />
 			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />

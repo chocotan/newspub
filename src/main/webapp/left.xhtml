@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head></h:head>
+<body>
+	<ui:composition>
+		<ul class="nav nav-list nav-stacked affix sidebar">
+		<li class="nav-header"><h4>新闻分类</h4></li>
+		<h:panelGroup rendered="#{param.c_id==null}">
+		<li class="active"><a href="./">全部新闻</a></li>
+		</h:panelGroup>
+		<h:panelGroup rendered="#{param.c_id!=null}">
+		<li><a href="./">全部新闻</a></li>
+		</h:panelGroup>
+		<ui:repeat var="cat" value="#{catBean.listPage(param.cpage)}">
+			<h:panelGroup rendered="#{param.c_id==cat.id}">
+			<li class="active">
+			<h:outputLink value="list.jsf">#{cat.name}
+			<f:param name="c_id" value="#{cat.id}"></f:param>
+			</h:outputLink>
+			</li>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{param.c_id!=cat.id}">
+			<li>
+			<h:outputLink value="list.jsf">#{cat.name}
+			<f:param name="c_id" value="#{cat.id}"></f:param>
+			</h:outputLink>
+			</li>
+			</h:panelGroup>
+		</ui:repeat>
+		</ul>
+	</ui:composition>
+</body>
+</html>

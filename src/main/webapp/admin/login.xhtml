@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/c">
+
+<h:head>
+	<title>管理员登陆</title>
+	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+	<style>
+.login-container {
+	width: 500px !important;
+	margin-top: 13% !important;
+}
+
+.login-label {
+	width: 60px !important;
+}
+
+.login-controls {
+	margin-left: 80px !important;
+}
+
+.login-submit {
+	width: 100px !important;
+}
+</style>
+</h:head>
+<h:body>
+	<div class="container login-container">
+		<div class="span5">
+			<h:form id="login-form" class="form-horizontal well">
+				<div class="control-group">
+					<h:outputLabel class="control-label login-label"
+						value="#{msg['login.username']}" for="username" />
+					<div class="controls login-controls">
+						<h:inputText id="username" value="#{adminBean.admin.username}" required="true">
+						</h:inputText>
+						<p:watermark value="#{msg['login.username']}" for="username"></p:watermark>
+					</div>
+				</div>
+				<div class="control-group">
+					<h:outputLabel class="control-label login-label"
+						value="#{msg['login.password']}" for="password" />
+					<div class="controls login-controls">
+						<h:inputSecret id="password" value="#{adminBean.admin.password}" required="true">
+						</h:inputSecret>
+						<p:watermark value="#{msg['login.password']}" for="password"></p:watermark>
+					</div>
+
+				</div>
+				<div class="control-group">
+					<div class="controls login-controls">
+						<h:commandButton class="btn btn-primary login-submit"
+							action="#{adminBean.login()}" value="#{msg['login.submit']}" />
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls login-controls">
+						<span class="label label-important"><h:message for="username"/></span>
+					</div>
+					<div class="controls login-controls">
+						<span class="label label-important"><h:message for="password"/></span>
+					</div>
+				</div>
+			</h:form>
+		</div>
+	</div>
+</h:body>
+</html>

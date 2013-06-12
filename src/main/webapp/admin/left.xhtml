@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<head><title></title></head>
+<body>
+<ui:composition>
+<ul class="nav nav-list nav-stacked affix sidebar">
+<li class="nav-header"><h4>新闻分类</h4></li>
+<li><h:outputLink value="cat/list.jsf"><h:outputText value="全部分类"/></h:outputLink></li>
+<li><a href="#">添加分类</a></li>
+<li class="divider"></li>
+<li class="nav-header">新闻</li>
+<li><a href="news/list.jsf">全部新闻</a></li>
+<li><a href="news/add.jsf">添加新闻</a></li>
+<li class="divider"></li>
+</ul>
+</ui:composition>
+</body>
+</html>

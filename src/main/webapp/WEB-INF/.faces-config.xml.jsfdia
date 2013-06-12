@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#admin#cat#edit.xhtml"
+  PATH="/admin/cat/edit.xhtml" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#admin#cat#edit.xhtml:0" NAME="item"
+   PATH="/admin/cat/edit.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="list::#admin#cat#list.xhtml" NAME="output"
+    PATH="/admin/cat/list.xhtml" TARGET="rules:#admin#cat#list.xhtml"
+    TITLE="list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#admin#cat#list.xhtml"
+  PATH="/admin/cat/list.xhtml" SHAPE="240,33,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#admin#cat#list.xhtml:0" NAME="item"
+   PATH="/admin/cat/list.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="list::#admin#cat#list.xhtml" NAME="output"
+    PATH="/admin/cat/list.xhtml" TARGET="rules:#admin#cat#list.xhtml"
+    TITLE="list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#admin#news#add.xhtml"
+  PATH="/admin/news/add.xhtml" SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#admin#news#add.xhtml:0" NAME="item"
+   PATH="/admin/news/add.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="list::#admin#news#list.xhtml" NAME="output"
+    PATH="/admin/news/list.xhtml" TARGET="rules:#admin#news#list.xhtml"
+    TITLE="list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#admin#news#list.xhtml"
+  PATH="/admin/news/list.xhtml" SHAPE="240,145,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:" SHAPE="32,241,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::0" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="logoutSuccess::#admin#login.xhtml"
+    NAME="output" PATH="/admin/login.xhtml"
+    TARGET="rules:#admin#login.xhtml" TITLE="logoutSuccess" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="catList::#admin#cat#list.xhtml"
+    NAME="output1" PATH="/admin/cat/list.xhtml"
+    TARGET="rules:#admin#cat#list.xhtml" TITLE="catList" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#admin#login.xhtml" PATH="/admin/login.xhtml"
+  SHAPE="240,257,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>
